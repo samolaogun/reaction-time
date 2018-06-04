@@ -8,7 +8,6 @@ var hasBegun = false;
 
 var database = firebase.database();
 
-
 if (window.matchMedia("(max-width: 704px)").matches) {
   document.querySelectorAll(".tap").forEach(function(el) {
     el.innerHTML = "Tap ";
@@ -126,7 +125,7 @@ async function click(className) {
 }
 
 async function keystroke(key) {
-  return Promise.race([touchStart()]);
+  return Promise.race([touchStart(), keyDown(key)]);
 }
 
 async function touchStart() {
