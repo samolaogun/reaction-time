@@ -8,7 +8,6 @@ var hasBegun = false;
 
 var database = firebase.database();
 
-// console.log(recordTime(1.5));
 
 if (window.matchMedia("(max-width: 704px)").matches) {
   document.querySelectorAll(".tap").forEach(function(el) {
@@ -66,7 +65,7 @@ async function showSummary(time) {
   h1.innerHTML = time;
   el.classList.add("slide--show");
   recordTime(time);
-  await click(".redo");
+  await Promise.race([click(".redo"), keystroke(" "), keystroke("S")]);
   el.classList.remove("slide--show");
 }
 
@@ -81,9 +80,11 @@ async function initGame() {
   await show(".start", keystroke("S"));
   await show(".ready", duration(2000));
   await show(".set", duration(Math.random() * 7000));
-  await showSummary(await timer(".go", keystroke(" ")));
+  const time = await timer(".go", keystroke(" "));
+  await duration(10);
+  await showSummary(time);
+  await duration(10);
   hasBegun = false;
-  return;
 }
 
 async function timer(...args) {
@@ -106,27 +107,42 @@ async function show(className, promise) {
 
   return new Promise((resolve, reject) => {
     el.classList.remove("slide--show");
-    el.addEventListener("transitionend", resolve);
+    el.addEventListener("transitionend", resolve, { once: true });
   });
 }
 
 async function click(className) {
   const el = document.querySelector(className);
   return new Promise((resolve, reject) => {
-    el.addEventListener("click", resolve);
+    if (window.matchMedia("(max-width: 704px)").matches) {
+      el.addEventListener("touchstart", resolve, {
+        once: true,
+        passive: true
+      });
+    } else {
+      el.addEventListener("click", resolve, { once: true });
+    }
   });
 }
 
 async function keystroke(key) {
+  return Promise.race([touchStart()]);
+}
+
+async function touchStart() {
+  console.log(1);
   return new Promise(function(resolve, reject) {
-    if (window.matchMedia("(max-width: 704px)").matches) {
-      game.addEventListener("click", function() {
-        resolve();
-      });
-    } else {
-      window.addEventListener("keyup", function(e) {
-        e.keyCode === key.charCodeAt(0) && resolve();
-      });
-    }
+    window.addEventListener("touchstart", resolve, {
+      once: true,
+      passive: true
+    });
+  });
+}
+
+async function keyDown(key) {
+  return new Promise(function(resolve, reject) {
+    window.addEventListener("keydown", function(e) {
+      e.keyCode === key.charCodeAt(0) && resolve();
+    });
   });
 }

@@ -129,33 +129,6 @@ aside {
   align-items: center;
 }
 
-@media (max-width: 704px) {
-  :root {
-    font-size: 60%;
-  }
-  hgroup,
-  section {
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  article {
-    margin: 0px;
-  }
-
-  aside {
-    margin: 24px 0;
-  }
-
-  header,
-  .container {
-    padding: 32px 16px;
-  }
-
-  header {
-    padding-top: 128px;
-  }
-}
 
 .game .instruction {
   color: white;
@@ -250,4 +223,46 @@ small {
   opacity: .4;
   margin-top: 16px;
 
+}
+
+@media (max-width: 704px) {
+  :root {
+    font-size: 60%;
+  }
+
+  .game .instruction {
+    font-size: 24px;
+  }
+
+  button {
+    padding: 16px 24px;
+  }
+  
+  hgroup,
+  section {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+
+  .summary {
+    padding: 0 10px;
+  }
+
+  article {
+    margin: 0px;
+  }
+
+  aside {
+    margin: 24px 0;
+  }
+
+  header,
+  .container {
+    padding: 32px 16px;
+  }
+
+  header {
+    padding-top: 128px;
+  }
 }
