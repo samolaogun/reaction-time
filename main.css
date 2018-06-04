@@ -1,4 +1,5 @@
 @import url(http://webfonts-plus.herokuapp.com?family=Graphik);
+@import url(fonts.css);
 
 * {
   font-family: "Graphik";
@@ -150,6 +151,10 @@ aside {
   .container {
     padding: 32px 16px;
   }
+
+  header {
+    padding-top: 128px;
+  }
 }
 
 .game .instruction {
@@ -242,5 +247,5 @@ aside {
 small {
   opacity: .4;
   margin-top: 16px;
-  
+
 }
