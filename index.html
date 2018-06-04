@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reaction Time Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyBad0sY0Ad5uHA3xYom6NYZJojog_A4Z-I",
+      authDomain: "reaction-time-315e8.firebaseapp.com",
+      databaseURL: "https://reaction-time-315e8.firebaseio.com",
+      projectId: "reaction-time-315e8",
+      storageBucket: "reaction-time-315e8.appspot.com",
+      messagingSenderId: "417868888705"
+    };
+  
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body>
+  <template>
+
+  </template>
+  <header>
+    <hgroup>
+      <h2 class="gray">Welcome to the</h2>
+      <h1>Reaction Time Test</h1>
+    </hgroup>
+  </header>
+  <article>
+    <div class="container">
+      <section>
+        <h2>Introduction</h2>
+        <p>Hello! I have to collect some data for my AP Statistics project, so help me out here. Btw, You can only take the
+          test
+          <b>once</b>.
+        </p>
+      </section>
+    </div>
+    <div class="container">
+      <section>
+        <h2>How it Works</h2>
+        <p>Below&mdash;like right under these instructions&mdash;is a reaction test. Read the instructions carefully and proceed!</p>
+        <aside>
+          <div class="instruction"><span class="tap">Press
+            <span class="key">S</span></span>to start</div>
+          <div class="instruction">We'll countdown Ready, Set...</div>
+          <div class="instruction">On "Go!" <span class="tap">Press
+            <span class="key">spacebar</span></span>to record your reaction time.</div>
+        </aside>
+      </section>
+    </div>
+  </article>
+  <div class="game-container">
+    <div class="game">
+      <div class="start slide">
+        <div class="instruction"><span class="tap">Press
+          <span class="key">S</span></span>to start</div>
+      </div>
+
+      <div class="ready slide">
+        <div class="instruction">Ready</div>
+      </div>
+
+      <div class="set slide">
+        <div class="instruction">Set</div>
+      </div>
+
+      <div class="go slide">
+        <div class="instruction">
+          <button class="timer">Stop Timer</button>
+          <div class="instruction"><span class="tap">Press
+            <span class="key">spacebar</span></span>to stop</div>
+        </div>
+      </div>
+
+      <div class="summary slide">
+        <div class="instruction">
+          <h1></h1>
+          <h2>seconds</h2>
+          <small>*Thanks a lot! Remember, you can't take this exam again.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
