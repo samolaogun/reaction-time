@@ -36,15 +36,16 @@ window.addEventListener(
       section.classList.remove("active");
     });
     if (active) active.classList.add("active");
-
-    if (gameIsInView()) {
-      if (!hasBegun) {
-        initGame();
-      }
-    }
+    if (gameIsInView()) startGame();
   },
   { passive: true }
 );
+
+async function startGame() {
+  if (!hasBegun) {
+    while (1) await initGame();
+  }
+}
 
 function inView(el) {
   const height = window.innerHeight;
@@ -65,6 +66,12 @@ async function showSummary(time) {
   h1.innerHTML = time;
   el.classList.add("slide--show");
   recordTime(time);
+  await click(".redo");
+  el.classList.remove("slide--show");
+}
+
+async function reset() {
+  await show(".reset", await click(".redo"));
 }
 
 async function initGame() {
@@ -75,7 +82,8 @@ async function initGame() {
   await show(".ready", duration(2000));
   await show(".set", duration(Math.random() * 7000));
   await showSummary(await timer(".go", keystroke(" ")));
-  
+  hasBegun = false;
+  return;
 }
 
 async function timer(...args) {
